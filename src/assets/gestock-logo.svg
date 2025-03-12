@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="200" height="60" viewBox="0 0 200 60">
+  <!-- Background shape -->
+  <defs>
+    <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4A6FFF;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2E4BB0;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Main container -->
+  <g>
+    <!-- Logo icon - stylized box/inventory -->
+    <g transform="translate(20, 10)">
+      <!-- Base box -->
+      <path d="M0,10 L10,0 L40,0 L30,10 Z" fill="url(#logoGradient)" />
+      
+      <!-- Front face -->
+      <path d="M0,10 L0,30 L30,30 L30,10 Z" fill="url(#logoGradient)" />
+      
+      <!-- Side face -->
+      <path d="M30,10 L40,0 L40,20 L30,30 Z" fill="#2E4BB0" />
+      
+      <!-- Box details -->
+      <line x1="10" y1="10" x2="25" y2="10" stroke="#ffffff" stroke-width="1.5" />
+      <line x1="10" y1="15" x2="25" y2="15" stroke="#ffffff" stroke-width="1.5" />
+      <line x1="10" y1="20" x2="25" y2="20" stroke="#ffffff" stroke-width="1.5" />
+      
+      <!-- Small squares representing inventory items -->
+      <rect x="5" y="15" width="3" height="3" fill="#ffffff" />
+      <rect x="5" y="22" width="3" height="3" fill="#ffffff" />
+    </g>
+    
+    <!-- Text -->
+    <text x="70" y="35" font-family="Arial, sans-serif" font-size="22" font-weight="bold" fill="#2E4BB0">Gestock</text>
+  </g>
+</svg>
