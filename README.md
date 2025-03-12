@@ -36,7 +36,6 @@
   - [⚙️ Installation](#-installation)
   - [🤖 Usage](#🤖-usage)
   - [🧪 Testing](#🧪-testing)
-- [📌 Project Roadmap](#-project-roadmap)
 - [🔰 Contributing](#-contributing)
 - [🎗 License](#-license)
 - [🙌 Acknowledgments](#-acknowledgments)
@@ -396,21 +395,10 @@ Run the test suite using the following command:
 ```
 
 
----
-## 📌 Project Roadmap
 
-- [X] **`Task 1`**: <strike>Implement feature one.</strike>
-- [ ] **`Task 2`**: Implement feature two.
-- [ ] **`Task 3`**: Implement feature three.
-
----
 
 ## 🔰 Contributing
-
-- **💬 [Join the Discussions](https://github.com/s-pl/gestock/discussions)**: Share your insights, provide feedback, or ask questions.
 - **🐛 [Report Issues](https://github.com/s-pl/gestock/issues)**: Submit bugs found or log feature requests for the `gestock` project.
-- **💡 [Submit Pull Requests](https://github.com/s-pl/gestock/blob/main/CONTRIBUTING.md)**: Review open PRs, and submit your own PRs.
-
 <details closed>
 <summary>Contributing Guidelines</summary>
 
@@ -446,16 +434,12 @@ Run the test suite using the following command:
 </p>
 </details>
 
----
 
-## 🎗 License
-
-This project is protected under the [SELECT-A-LICENSE](https://choosealicense.com/licenses) License. For more details, refer to the [LICENSE](https://choosealicense.com/licenses/) file.
-
----
 
 ## 🙌 Acknowledgments
 
-- List any resources, contributors, inspiration, etc. here.
+- Tiburcio
+- Medium
+- W3Schools
 
 ---
