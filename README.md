@@ -5,7 +5,6 @@
 	<em>Empowering Inventory Insight, One Click at a Time.</em>
 </p>
 <p align="left">
-	<img src="https://img.shields.io/github/license/s-pl/gestock?style=social&logo=opensourceinitiative&logoColor=white&color=060606" alt="license">
 	<img src="https://img.shields.io/github/last-commit/s-pl/gestock?style=social&logo=git&logoColor=white&color=060606" alt="last-commit">
 	<img src="https://img.shields.io/github/languages/top/s-pl/gestock?style=social&color=060606" alt="repo-top-language">
 	<img src="https://img.shields.io/github/languages/count/s-pl/gestock?style=social&color=060606" alt="repo-language-count">
