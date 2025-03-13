@@ -36,8 +36,8 @@ function Contact() {
       return;
     }
     
-    // send this data to some backend
-    console.log('Form submitted:', formData);
+    
+   
     setSubmitted(true);
     setError('');
     setFormData({

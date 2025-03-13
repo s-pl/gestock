@@ -12,12 +12,11 @@ import About from './pages/About.jsx'
 import Contact from './pages/Contact.jsx'
 import ProtectedRoute from './components/Auth/ProtectedRoute.jsx'
 import { AuthProvider } from './contexts/AuthContext'
-import { ThemeProvider } from './contexts/ThemeContext'
 
 function App() {
   return (
     <AuthProvider>
-      <ThemeProvider>
+      
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Layout />}>
@@ -33,7 +32,7 @@ function App() {
             </Route>
           </Routes>
         </BrowserRouter>
-      </ThemeProvider>
+     
     </AuthProvider>
   )
 }

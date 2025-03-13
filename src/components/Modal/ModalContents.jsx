@@ -45,9 +45,7 @@ export const TermsContent = () => (
       Nos reservamos el derecho de modificar estos términos en cualquier momento. Las modificaciones entrarán en vigor inmediatamente después de su publicación en el sitio.
     </Typography>
     
-    <Typography level="body-md" sx={{ mt: 3, fontStyle: 'italic' }}>
-      Última actualización: {new Date().toLocaleDateString()}
-    </Typography>
+ 
   </>
 );
 
@@ -145,9 +143,6 @@ export const CookiesContent = () => (
     <Typography level="body-md" sx={{ mb: 2 }}>
       Algunos de nuestros socios pueden establecer cookies en tu dispositivo. Estas cookies nos ayudan a analizar el uso del sitio y a proporcionar funcionalidades adicionales.
     </Typography>
-    
-    <Typography level="body-md" sx={{ mt: 3, fontStyle: 'italic' }}>
-      Última actualización: {new Date().toLocaleDateString()}
-    </Typography>
+  
   </>
 );

@@ -7,6 +7,9 @@ import Tabs from '@mui/joy/Tabs';
 import TabList from '@mui/joy/TabList';
 import Tab from '@mui/joy/Tab';
 import TabPanel from '@mui/joy/TabPanel';
+import SyntaxHighlighter from 'react-syntax-highlighter';
+import { dracula } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+
 
 function Snippets() {
     const [tabValue, setTabValue] = React.useState(0);
@@ -56,7 +59,7 @@ function Snippets() {
                                 <Tab>Python</Tab>
                                 <Tab>cURL</Tab>
                             </TabList>
-                            <TabPanel value={0} sx={{ p: 2, backgroundColor: '#1e1e1e', borderRadius: '0 0 8px 8px' }}>
+                            <TabPanel value={0} sx={{ p: 2, backgroundColor: '#282A36', borderRadius: '0 0 8px 8px' }}>
                                 <Typography
                                     level="body-sm"
                                     sx={{
@@ -65,7 +68,8 @@ function Snippets() {
                                         color: '#d4d4d4'
                                     }}
                                 >
-                                    {`// Inicializar el cliente de API
+                                    <SyntaxHighlighter language="javascript" style={dracula}>
+                                        {`// Inicializar el cliente de API
 const gestockAPI = new GestockAPI('YOUR_API_KEY');
 
 // Obtener lista de productos
@@ -85,9 +89,10 @@ async function getProducts() {
     console.error('Error al obtener productos:', error);
   }
 }`}
+                                    </SyntaxHighlighter>
                                 </Typography>
                             </TabPanel>
-                            <TabPanel value={1} sx={{ p: 2, backgroundColor: '#1e1e1e', borderRadius: '0 0 8px 8px' }}>
+                            <TabPanel value={1} sx={{ p: 2, backgroundColor: '#282A36', borderRadius: '0 0 8px 8px' }}>
                                 <Typography
                                     level="body-sm"
                                     sx={{
@@ -96,7 +101,7 @@ async function getProducts() {
                                         color: '#d4d4d4'
                                     }}
                                 >
-                                    {`# Inicializar el cliente de API
+                                     <SyntaxHighlighter language="python" style={dracula}>{`# Inicializar el cliente de API
 from gestock import GestockAPI
 
 api = GestockAPI("YOUR_API_KEY")
@@ -117,10 +122,10 @@ try:
     
 except Exception as e:
     print(f"Error al crear producto: {str(e)}")
-`}
+`}</SyntaxHighlighter>
                                 </Typography>
                             </TabPanel>
-                            <TabPanel value={2} sx={{ p: 2, backgroundColor: '#1e1e1e', borderRadius: '0 0 8px 8px' }}>
+                            <TabPanel value={2} sx={{ p: 2, backgroundColor: '#282A36', borderRadius: '0 0 8px 8px' }}>
                                 <Typography
                                     level="body-sm"
                                     sx={{
@@ -129,7 +134,7 @@ except Exception as e:
                                         color: '#d4d4d4'
                                     }}
                                 >
-                                    {`# Actualizar el stock de un producto
+                                    <SyntaxHighlighter language="curl" style={dracula}>{`# Actualizar el stock de un producto
 curl -X PATCH https://api.gestock.com/v1/inventory/products/prod_123 \\
   -H "Content-Type: application/json" \\
   -H "Authorization: Bearer YOUR_API_KEY" \\
@@ -146,7 +151,7 @@ curl -X GET https://api.gestock.com/v1/inventory/movements \\
     "date_from": "2023-01-01",
     "date_to": "2023-12-31"
   }'
-`}
+`}</SyntaxHighlighter>
                                 </Typography>
                             </TabPanel>
                         </Tabs>

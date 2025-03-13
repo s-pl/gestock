@@ -18,7 +18,7 @@ import Grid from '@mui/joy/Grid';
 import Sheet from '@mui/joy/Sheet';
 import Alert from '@mui/joy/Alert';
 
-// Register ChartJS components
+
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -57,7 +57,7 @@ function InventoryStats() {
           products.push({ id: doc.id, ...doc.data() });
         });
 
-        // Process data for category chart
+   
         const categoryMap = {};
         products.forEach(product => {
           const category = product.category || 'Sin categoría';
@@ -72,7 +72,7 @@ function InventoryStats() {
           counts: categoryCounts
         });
 
-        // Process data for inventory value chart
+
         const categoryValueMap = {};
         products.forEach(product => {
           const category = product.category || 'Sin categoría';
@@ -267,7 +267,7 @@ function InventoryStats() {
                     }}
                   >
                     <Typography level="h2">
-                      ${priceData.values.reduce((a, b) => a + b, 0).toFixed(2)}
+                    €{priceData.values.reduce((a, b) => a + b, 0).toFixed(2)}
                     </Typography>
                     <Typography>Valor Total</Typography>
                   </Sheet>

@@ -14,7 +14,6 @@ import FormLabel from '@mui/joy/FormLabel';
 import Input from '@mui/joy/Input';
 import Select from '@mui/joy/Select';
 import Option from '@mui/joy/Option';
-import IconButton from '@mui/joy/IconButton';
 import Alert from '@mui/joy/Alert';
 import Divider from '@mui/joy/Divider';
 import Grid from '@mui/joy/Grid';
@@ -43,7 +42,7 @@ function Inventory() {
     'Otros'
   ];
 
-  // Fetch products from Firestore
+ 
   useEffect(() => {
     if (!currentUser) return;
 
@@ -72,7 +71,6 @@ function Inventory() {
     fetchProducts();
   }, [currentUser]);
 
-  // Handle form input changes
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -81,7 +79,7 @@ function Inventory() {
     });
   };
 
-  // Handle category selection
+ 
   const handleCategoryChange = (e, newValue) => {
     setFormData({
       ...formData,
@@ -89,7 +87,7 @@ function Inventory() {
     });
   };
 
-  // Open modal for adding a new product
+ 
   const handleAddProduct = () => {
     setCurrentProduct(null);
     setFormData({
@@ -102,7 +100,7 @@ function Inventory() {
     setOpenModal(true);
   };
 
-  // Open modal for editing a product
+ 
   const handleEditProduct = (product) => {
     setCurrentProduct(product);
     setFormData({
@@ -115,7 +113,7 @@ function Inventory() {
     setOpenModal(true);
   };
 
-  // Save product (add or update)
+  
   const handleSaveProduct = async (e) => {
     e.preventDefault();
     
@@ -136,13 +134,13 @@ function Inventory() {
       };
 
       if (currentProduct) {
-        // Update existing product
+        
         await updateDoc(doc(db, 'products', currentProduct.id), productData);
         setProducts(products.map(p => 
           p.id === currentProduct.id ? { id: currentProduct.id, ...productData } : p
         ));
       } else {
-        // Add new product
+       
         productData.createdAt = new Date();
         const docRef = await addDoc(collection(db, 'products'), productData);
         setProducts([...products, { id: docRef.id, ...productData }]);
@@ -156,7 +154,7 @@ function Inventory() {
     }
   };
 
-  // Delete product
+  
   const handleDeleteProduct = async (productId) => {
     if (!window.confirm('¿Estás seguro de que deseas eliminar este producto?')) {
       return;
