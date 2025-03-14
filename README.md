@@ -37,6 +37,7 @@
   - [🤖 Usage](#🤖-usage)
   - [🧪 Testing](#🧪-testing)
 - [🔰 Contributing](#-contributing)
+- [🎗 License](#-license)
 - [🙌 Acknowledgments](#-acknowledgments)
 
 ---

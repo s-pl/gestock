@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"
+    xmlns:media="http://search.yahoo.com/mrss/"
+    xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" version="2.0">
+  <channel>
+    <title>Gestock News</title>
+    <link>https://www.gestock.com/news</link>
+    <description>Latest updates and news from Gestock - Cloud Inventory Management Solutions</description>
+    <item>
+      <title>Gestock Launches New AI-Powered Inventory Forecasting Tool</title>
+      <link>https://www.gestock.com/news/ai-powered-forecasting-tool</link>
+      <description>Gestock is excited to announce the launch of its new AI-powered inventory forecasting tool...</description>
+      <pubDate>Sat, 01 Mar 2025 12:00:00 GMT</pubDate>
+      <category>Product Update</category>
+      <guid>https://www.gestock.com/news/ai-powered-forecasting-tool</guid>
+    </item>
+    <item>
+      <title>Gestock Partners with Leading E-Commerce Platform</title>
+      <link>https://www.gestock.com/news/ecommerce-partnership</link>
+      <description>Gestock has officially partnered with one of the world's leading e-commerce platforms...</description>
+      <pubDate>Sun, 15 Feb 2025 09:00:00 GMT</pubDate>
+      <category>Partnership</category>
+      <guid>https://www.gestock.com/news/ecommerce-partnership</guid>
+    </item>
+    <item>
+      <title>Gestock Expands to Europe: New Offices Open in Germany</title>
+      <link>https://www.gestock.com/news/expansion-to-europe</link>
+      <description>Gestock is thrilled to announce its expansion into the European market with new offices in Germany...</description>
+      <pubDate>Thu, 20 Jan 2025 10:00:00 GMT</pubDate>
+      <category>Expansion</category>
+      <guid>https://www.gestock.com/news/expansion-to-europe</guid>
+    </item>
+  </channel>
+</rss>

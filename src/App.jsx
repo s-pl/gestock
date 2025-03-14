@@ -11,6 +11,7 @@ import About from './pages/About.jsx'
 import Contact from './pages/Contact.jsx'
 import ProtectedRoute from './components/Auth/ProtectedRoute.jsx'
 import { AuthProvider } from './contexts/AuthContext'
+import News from './pages/News.jsx'
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Layout />}>
+              
               <Route path='/' element={<Home />} />
               <Route path='/home' element={<Home />} />
               <Route path='/about' element={<About />} />
@@ -29,8 +31,11 @@ function App() {
               <Route path='/dashboard' element={<ProtectedRoute />}>
                 <Route path='' element={<Dashboard />} />
               </Route>
+              <Route path='/news' element={<News/>} />
             </Route>
+            
           </Routes>
+          
         </BrowserRouter>
      
     </AuthProvider>
