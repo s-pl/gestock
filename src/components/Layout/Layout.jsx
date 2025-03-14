@@ -78,7 +78,7 @@ const Layout = () => {
             </ListItem>
             <ListItem>
               <Link component={RouterLink} to="/about" underline="none">
-                Acerca de
+                Nosotros
               </Link>
             </ListItem>
             {currentUser && (
