@@ -9,7 +9,7 @@ function News() {
     return (
         <Box sx={{ maxWidth: '1200px', margin: '0 auto', padding: 2 }}>
             <Typography level="h2" sx={{ mb: 3 }}>
-                Noticias <Button onClick={function(){window.location = "/news.xml"}}><IoLogoRss /></Button>
+                Noticias <Button onClick={function(){window.location = "https://raw.githubusercontent.com/s-pl/gestock/refs/heads/main/public/news.xml"}}><IoLogoRss /></Button>
 
             </Typography>
 
