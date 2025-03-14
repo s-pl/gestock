@@ -260,7 +260,7 @@ function Inventory() {
         </Sheet>
       )}
 
-      {/* Add/Edit Product Modal */}
+
       <Modal open={openModal} onClose={() => setOpenModal(false)}>
         <ModalDialog
           aria-labelledby="product-modal-title"
