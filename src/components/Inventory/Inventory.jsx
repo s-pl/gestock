@@ -227,7 +227,7 @@ function Inventory() {
                   <td>{product.name}</td>
                   <td>{product.category}</td>
                   <td>{product.quantity}</td>
-                  <td>${product.price.toFixed(2)}</td>
+                  <td>€{product.price.toFixed(2)}</td>
                   <td>
                     {product.description && product.description.length > 30
                       ? `${product.description.substring(0, 30)}...`
