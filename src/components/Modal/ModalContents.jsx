@@ -89,10 +89,7 @@ export const PrivacyContent = () => (
     <Typography level="body-md" sx={{ mb: 2 }}>
       Tienes derecho a acceder, corregir, eliminar y exportar tus datos personales. También puedes oponerte al procesamiento de tus datos en ciertas circunstancias.
     </Typography>
-    
-    <Typography level="body-md" sx={{ mt: 3, fontStyle: 'italic' }}>
-      Última actualización: {new Date().toLocaleDateString()}
-    </Typography>
+    <img src="https://i.pinimg.com/originals/51/5a/8d/515a8da287ae3d77dfbf851515c63734.gif" width={30}/>
   </>
 );
 

@@ -61,7 +61,7 @@ const Layout = () => {
         >
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
             <Link component={RouterLink} to="/" sx={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
-              <img src={gestockLogo} alt="Gestock Logo" style={{ height: '40px' }} />
+              <img src={gestockLogo} alt="Gestock Logo" style={{ width : '40px'}} />
             </Link>
           </Box>
 
