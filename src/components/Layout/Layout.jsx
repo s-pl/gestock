@@ -264,12 +264,24 @@ const Layout = () => {
                 >
                   Cookies
                 </Link>
+                
+              </ListItem>
+              <ListItem>
+                <Link 
+                  component="button" 
+                  onClick={() => window.location = "/news"} 
+                  underline="none" 
+                  level="body-sm"
+                >
+                  Canal de noticias
+                </Link>
+                
               </ListItem>
             </List>
           </Box>
         </Sheet>
 
-        {/* Modals */}
+        
         <CustomModal 
           open={openTerms} 
           onClose={() => setOpenTerms(false)} 
