@@ -6,20 +6,6 @@ import { getFirestore } from 'firebase/firestore';
 
 const firebaseConfig = {
 
-  apiKey: "AIzaSyAIcUf46TZ3uDmeubsiYMjCQAe-FMengaY",
-
-  authDomain: "proyecto-2entrega-lnd.firebaseapp.com",
-
-  projectId: "proyecto-2entrega-lnd",
-
-  storageBucket: "proyecto-2entrega-lnd.firebasestorage.app",
-
-  messagingSenderId: "1087635450180",
-
-  appId: "1:1087635450180:web:e1f841fabab164f49c4f11",
-
-  measurementId: "G-KP6807J6JV"
-
 };
 
   
