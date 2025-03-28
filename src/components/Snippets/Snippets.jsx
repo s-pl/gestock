@@ -10,7 +10,6 @@ import TabPanel from '@mui/joy/TabPanel';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { dracula } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 
-
 function Snippets() {
     const [tabValue, setTabValue] = React.useState(0);
 
@@ -56,8 +55,6 @@ function Snippets() {
                         <Tabs value={tabValue} onChange={handleTabChange}>
                             <TabList>
                                 <Tab>JavaScript</Tab>
-                                <Tab>Python</Tab>
-                                <Tab>cURL</Tab>
                             </TabList>
                             <TabPanel value={0} sx={{ p: 2, backgroundColor: '#282A36', borderRadius: '0 0 8px 8px' }}>
                                 <Typography
@@ -69,89 +66,34 @@ function Snippets() {
                                     }}
                                 >
                                     <SyntaxHighlighter language="javascript" style={dracula}>
-                                        {`// Inicializar el cliente de API
-const gestockAPI = new GestockAPI('YOUR_API_KEY');
+                                        {`import GestockAPI from "gestock";
+
+const api = new GestockAPI();
 
 // Obtener lista de productos
-async function getProducts() {
+async function fetchProducts() {
   try {
-    const products = await gestockAPI.inventory.list({
-      limit: 10,
-      offset: 0,
-      sort: 'stock_level'
-    });
-    
-    console.log(\`Total productos: \${products.total}\`);
-    products.data.forEach(product => {
-      console.log(\`\${product.id}: \${product.name} (Stock: \${product.stock})\`);
-    });
+    const products = await api.getProducts("YOUR API KEY");
+    console.log("Products:", products);
   } catch (error) {
-    console.error('Error al obtener productos:', error);
+    console.error("Error fetching products:", error);
   }
-}`}
+}
+
+fetchProducts();
+
+// Crear un producto
+async function addProduct() {
+  try {
+    const newProduct = await api.createProduct("YOUR API KEY", "New Product", 100);
+    console.log("Product created:", newProduct);
+  } catch (error) {
+    console.error("Error creating product:", error);
+  }
+}
+
+addProduct();`}
                                     </SyntaxHighlighter>
-                                </Typography>
-                            </TabPanel>
-                            <TabPanel value={1} sx={{ p: 2, backgroundColor: '#282A36', borderRadius: '0 0 8px 8px' }}>
-                                <Typography
-                                    level="body-sm"
-                                    sx={{
-                                        fontFamily: 'monospace',
-                                        whiteSpace: 'pre-wrap',
-                                        color: '#d4d4d4'
-                                    }}
-                                >
-                                     <SyntaxHighlighter language="python" style={dracula}>{`# Inicializar el cliente de API
-from gestock import GestockAPI
-
-api = GestockAPI("YOUR_API_KEY")
-
-# Registrar un nuevo producto
-try:
-    new_product = api.inventory.create(
-        name="Monitor LED 24 pulgadas",
-        sku="MON-LED-24",
-        category="Electrónica",
-        price=149.99,
-        stock=25,
-        supplier_id="SUP-001"
-    )
-    
-    print(f"Producto creado: {new_product.id}")
-    print(f"SKU: {new_product.sku}, Stock inicial: {new_product.stock}")
-    
-except Exception as e:
-    print(f"Error al crear producto: {str(e)}")
-`}</SyntaxHighlighter>
-                                </Typography>
-                            </TabPanel>
-                            <TabPanel value={2} sx={{ p: 2, backgroundColor: '#282A36', borderRadius: '0 0 8px 8px' }}>
-                                <Typography
-                                    level="body-sm"
-                                    sx={{
-                                        fontFamily: 'monospace',
-                                        whiteSpace: 'pre-wrap',
-                                        color: '#d4d4d4'
-                                    }}
-                                >
-                                    <SyntaxHighlighter language="curl" style={dracula}>{`# Actualizar el stock de un producto
-curl -X PATCH https://api.gestock.com/v1/inventory/products/prod_123 \\
-  -H "Content-Type: application/json" \\
-  -H "Authorization: Bearer YOUR_API_KEY" \\
-  -d '{
-    "stock": 42,
-    "stock_status": "in_stock"
-  }'
-
-# Obtener movimientos de inventario
-curl -X GET https://api.gestock.com/v1/inventory/movements \\
-  -H "Authorization: Bearer YOUR_API_KEY" \\
-  -d '{
-    "product_id": "prod_123",
-    "date_from": "2023-01-01",
-    "date_to": "2023-12-31"
-  }'
-`}</SyntaxHighlighter>
                                 </Typography>
                             </TabPanel>
                         </Tabs>

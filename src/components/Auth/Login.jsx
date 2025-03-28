@@ -10,6 +10,9 @@ import Typography from '@mui/joy/Typography';
 import Sheet from '@mui/joy/Sheet';
 import Alert from '@mui/joy/Alert';
 import Divider from '@mui/joy/Divider';
+import GoogleButton from 'react-google-button';
+import { getAuth, signInWithPopup, GoogleAuthProvider, GithubAuthProvider } from "firebase/auth";
+import LoginWithGithubButton from '../GithubButton/LoginWithGithubButton';
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -21,7 +24,6 @@ function Login() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-
     try {
       setError('');
       setLoading(true);
@@ -34,6 +36,35 @@ function Login() {
     }
   }
 
+  
+  async function handleGoogleLogin() {
+    const auth = getAuth();
+    const provider = new GoogleAuthProvider();
+    try {
+      setError('');
+      setLoading(true);
+      await signInWithPopup(auth, provider);
+      navigate('/');
+    } catch (error) {
+      setError(error.message);
+    } finally {
+      setLoading(false);
+    }
+  }
+async function handleGithubLogin() {
+    const auth = getAuth();
+    const provider = new GithubAuthProvider();
+    try {
+      setError('');
+      setLoading(true);
+      await signInWithPopup(auth, provider);
+      navigate('/');
+    } catch (error) {
+      setError(error.message);
+    } finally {
+      setLoading(false);
+    }
+  }
   return (
     <Box
       sx={{
@@ -78,7 +109,7 @@ function Login() {
               required
             />
           </FormControl>
-          <FormControl className="form-control">
+          <FormControl>
             <FormLabel>Contraseña</FormLabel>
             <Input
               type="password"
@@ -98,6 +129,13 @@ function Login() {
           >
             Iniciar sesión
           </Button>
+
+         
+          <GoogleButton
+            onClick={handleGoogleLogin}
+            style={{ marginBottom: '10px', width: '100%' }}
+          />
+          <LoginWithGithubButton onClick={handleGithubLogin}/>
         </form>
 
         <Typography level="body-sm" sx={{ mb: 2, textAlign: 'center' }}>

@@ -10,7 +10,9 @@ import Typography from '@mui/joy/Typography';
 import Sheet from '@mui/joy/Sheet';
 import Alert from '@mui/joy/Alert';
 import Divider from '@mui/joy/Divider';
-
+import GoogleButton from 'react-google-button';
+import { getAuth, signInWithPopup, GoogleAuthProvider, GithubAuthProvider } from "firebase/auth";
+import LoginWithGithubButton from '../GithubButton/LoginWithGithubButton';
 function Signup() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -38,7 +40,34 @@ function Signup() {
       setLoading(false);
     }
   }
-
+async function handleGoogleLogin() {
+    const auth = getAuth();
+    const provider = new GoogleAuthProvider();
+    try {
+      setError('');
+      setLoading(true);
+      await signInWithPopup(auth, provider);
+      navigate('/');
+    } catch (error) {
+      setError(error.message);
+    } finally {
+      setLoading(false);
+    }
+  }
+  async function handleGithubLogin() {
+    const auth = getAuth();
+    const provider = new GithubAuthProvider();
+    try {
+      setError('');
+      setLoading(true);
+      await signInWithPopup(auth, provider);
+      navigate('/');
+    } catch (error) {
+      setError(error.message);
+    } finally {
+      setLoading(false);
+    }
+  }
   return (
     <Box
       sx={{
@@ -113,6 +142,14 @@ function Signup() {
           >
             Registrarse
           </Button>
+          
+
+          
+          <GoogleButton
+            onClick={handleGoogleLogin}
+            style={{ marginBottom: '10px', width: '100%' }}
+          />
+          <LoginWithGithubButton onClick={handleGithubLogin}/>
         </form>
 
         <Divider sx={{ my: 2 }}>
