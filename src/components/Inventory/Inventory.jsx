@@ -18,6 +18,7 @@ import Alert from '@mui/joy/Alert';
 import Divider from '@mui/joy/Divider';
 import Grid from '@mui/joy/Grid';
 
+
 function Inventory() {
   const { currentUser } = useAuth();
   const [products, setProducts] = useState([]);
@@ -25,6 +26,9 @@ function Inventory() {
   const [error, setError] = useState('');
   const [openModal, setOpenModal] = useState(false);
   const [currentProduct, setCurrentProduct] = useState(null);
+  const [filter, setFilter] = useState(null);
+  const [showUID, setShowUID] = useState(false); 
+
   const [formData, setFormData] = useState({
     name: '',
     category: '',
@@ -42,10 +46,10 @@ function Inventory() {
     'Otros'
   ];
 
- 
+
   useEffect(() => {
     if (!currentUser) return;
-
+    console.log(currentUser.uid);
     const fetchProducts = async () => {
       try {
         setLoading(true);
@@ -55,9 +59,23 @@ function Inventory() {
         );
         const querySnapshot = await getDocs(q);
         const productsData = [];
-        querySnapshot.forEach((doc) => {
-          productsData.push({ id: doc.id, ...doc.data() });
-        });
+
+        if (!filter) {
+          querySnapshot.forEach((doc) => {
+            productsData.push({ id: doc.id, ...doc.data() });
+
+          });
+
+        } else {
+          querySnapshot.forEach((doc) => {
+            if (doc.data().name.toLowerCase().includes(filter.toLowerCase())) {
+              productsData.push({ id: doc.id, ...doc.data() });
+            } else {
+              return;
+            }
+          });
+        }
+
         setProducts(productsData);
         setError('');
       } catch (err) {
@@ -69,7 +87,7 @@ function Inventory() {
     };
 
     fetchProducts();
-  }, [currentUser]);
+  }, [currentUser,filter]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -79,7 +97,9 @@ function Inventory() {
     });
   };
 
- 
+
+  
+
   const handleCategoryChange = (e, newValue) => {
     setFormData({
       ...formData,
@@ -87,7 +107,7 @@ function Inventory() {
     });
   };
 
- 
+
   const handleAddProduct = () => {
     setCurrentProduct(null);
     setFormData({
@@ -100,7 +120,7 @@ function Inventory() {
     setOpenModal(true);
   };
 
- 
+
   const handleEditProduct = (product) => {
     setCurrentProduct(product);
     setFormData({
@@ -113,10 +133,10 @@ function Inventory() {
     setOpenModal(true);
   };
 
-  
+
   const handleSaveProduct = async (e) => {
     e.preventDefault();
-    
+
     if (!currentUser) {
       setError('Debes iniciar sesión para realizar esta acción');
       return;
@@ -134,13 +154,13 @@ function Inventory() {
       };
 
       if (currentProduct) {
-        
+
         await updateDoc(doc(db, 'products', currentProduct.id), productData);
-        setProducts(products.map(p => 
+        setProducts(products.map(p =>
           p.id === currentProduct.id ? { id: currentProduct.id, ...productData } : p
         ));
       } else {
-       
+
         productData.createdAt = new Date();
         const docRef = await addDoc(collection(db, 'products'), productData);
         setProducts([...products, { id: docRef.id, ...productData }]);
@@ -149,12 +169,12 @@ function Inventory() {
       setOpenModal(false);
       setError('');
     } catch (err) {
-      console.error('Error saving product:', err);
+
       setError('Error al guardar el producto. Por favor, inténtalo de nuevo.');
     }
   };
 
-  
+
   const handleDeleteProduct = async (productId) => {
     if (!window.confirm('¿Estás seguro de que deseas eliminar este producto?')) {
       return;
@@ -165,21 +185,38 @@ function Inventory() {
       setProducts(products.filter(p => p.id !== productId));
       setError('');
     } catch (err) {
-      console.error('Error deleting product:', err);
+
       setError('Error al eliminar el producto. Por favor, inténtalo de nuevo.');
     }
   };
-
+   
   return (
+    
     <Box sx={{ maxWidth: '1200px', margin: '0 auto', padding: 2 }}>
+      
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
         <Typography level="h2">Inventario</Typography>
-        <Button 
-          onClick={handleAddProduct} 
+        <Input
+  placeholder="Busca por nombre del producto"
+  
+  onKeyUp={(e) => {
+    setFilter(e.target.value);
+    console.log(e.target.value);
+  }}
+  sx={{
+    maxWidth: '400px', 
+    right: { xs: '10px', sm: '10px', md: '150px', lg: '275px' }, 
+    
+  }}
+/>
+
+        <Button
+          onClick={handleAddProduct}
           size="md"
         >
           Añadir Producto
         </Button>
+        
       </Box>
 
       {error && (
@@ -191,15 +228,16 @@ function Inventory() {
       {loading ? (
         <Typography>Cargando productos...</Typography>
       ) : products.length === 0 ? (
-        <Sheet 
-          variant="outlined" 
-          sx={{ 
-            borderRadius: 'md', 
-            p: 4, 
+        <Sheet
+          variant="outlined"
+          sx={{
+            borderRadius: 'md',
+            p: 4,
             textAlign: 'center',
-            backgroundColor: 'background.level1' 
+            backgroundColor: 'background.level1'
           }}
         >
+
           <Typography level="h4" sx={{ mb: 2 }}>
             No hay productos en tu inventario
           </Typography>
@@ -222,12 +260,13 @@ function Inventory() {
               </tr>
             </thead>
             <tbody>
+
               {products.map((product) => (
                 <tr key={product.id}>
                   <td>{product.name}</td>
                   <td>{product.category}</td>
                   <td>{product.quantity}</td>
-                  <td>€{product.price.toFixed(2)}</td>
+                  <td>${product.price.toFixed(2)}</td>
                   <td>
                     {product.description && product.description.length > 30
                       ? `${product.description.substring(0, 30)}...`
@@ -235,18 +274,18 @@ function Inventory() {
                   </td>
                   <td>
                     <Box sx={{ display: 'flex', gap: 1 }}>
-                      <Button 
-                        size="sm" 
-                        variant="plain" 
-                        color="primary" 
+                      <Button
+                        size="sm"
+                        variant="plain"
+                        color="primary"
                         onClick={() => handleEditProduct(product)}
                       >
                         Editar
                       </Button>
-                      <Button 
-                        size="sm" 
-                        variant="plain" 
-                        color="danger" 
+                      <Button
+                        size="sm"
+                        variant="plain"
+                        color="danger"
                         onClick={() => handleDeleteProduct(product.id)}
                       >
                         Eliminar
@@ -286,6 +325,7 @@ function Inventory() {
                     placeholder="Nombre del producto"
                   />
                 </FormControl>
+                
               </Grid>
               <Grid xs={12}>
                 <FormControl required>
@@ -305,6 +345,7 @@ function Inventory() {
                 </FormControl>
               </Grid>
               <Grid xs={6}>
+               
                 <FormControl required>
                   <FormLabel>Cantidad</FormLabel>
                   <Input
@@ -356,6 +397,23 @@ function Inventory() {
           </form>
         </ModalDialog>
       </Modal>
+      <Box sx={{ mt: 3 }}>
+  {!showUID && (
+    <Button
+      onClick={() => setShowUID(true)} 
+      size="md"
+      variant="outlined"
+      sx={{ mt: 1 }}
+    >
+      Mostrar Api Key
+    </Button>
+  )}
+  {showUID && (
+    <Typography level="body1" sx={{ mt: 2 }}>
+     {currentUser?.uid}
+    </Typography>
+  )}
+</Box>
     </Box>
   );
 }

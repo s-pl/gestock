@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import './App.css'
 
@@ -11,12 +12,11 @@ import About from './pages/About.jsx'
 import Contact from './pages/Contact.jsx'
 import ProtectedRoute from './components/Auth/ProtectedRoute.jsx'
 import { AuthProvider } from './contexts/AuthContext'
-import News from './pages/News.jsx'
+
 
 function App() {
   return (
     <AuthProvider>
-      
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Layout />}>
@@ -30,13 +30,9 @@ function App() {
               <Route path='/dashboard' element={<ProtectedRoute />}>
                 <Route path='' element={<Dashboard />} />
               </Route>
-              <Route path='/news' element={<News/>} />
             </Route>
-            
           </Routes>
-          
         </BrowserRouter>
-     
     </AuthProvider>
   )
 }

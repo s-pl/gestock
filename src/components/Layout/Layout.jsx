@@ -59,9 +59,10 @@ const Layout = () => {
             borderColor: 'divider',
           }}
         >
+          
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
             <Link component={RouterLink} to="/" sx={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
-              <img src={gestockLogo} alt="Gestock Logo" style={{ width : '40px'}} />
+              <img src={gestockLogo} alt="Gestock Logo" style={{ height: '40px' }} />
             </Link>
           </Box>
 
@@ -78,7 +79,7 @@ const Layout = () => {
             </ListItem>
             <ListItem>
               <Link component={RouterLink} to="/about" underline="none">
-                Nosotros
+                Acerca de
               </Link>
             </ListItem>
             {currentUser && (
@@ -95,6 +96,8 @@ const Layout = () => {
                 Contacto
               </Link>
             </ListItem>
+          
+            
           </List>
 
           
@@ -165,10 +168,12 @@ const Layout = () => {
                     <MenuItem component={RouterLink} to="/dashboard">
                       Dashboard
                     </MenuItem>
+                    
                   )}
                   <MenuItem component={RouterLink} to="/contact">
                     Contacto
                   </MenuItem>
+                  
                 </Menu>
               </Dropdown>
             </Box>
@@ -193,6 +198,7 @@ const Layout = () => {
                 >
                   Iniciar sesión
                 </Button>
+                
                 <Button component={RouterLink} to="/signup">
                   Registrarse
                 </Button>
@@ -264,24 +270,11 @@ const Layout = () => {
                 >
                   Cookies
                 </Link>
-                
-              </ListItem>
-              <ListItem>
-                <Link 
-                  component="button" 
-                  onClick={() => window.location = "/news"} 
-                  underline="none" 
-                  level="body-sm"
-                >
-                  Canal de noticias
-                </Link>
-                
               </ListItem>
             </List>
           </Box>
         </Sheet>
 
-        
         <CustomModal 
           open={openTerms} 
           onClose={() => setOpenTerms(false)} 
