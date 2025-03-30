@@ -105,7 +105,7 @@ Gestock is a cutting-edge inventory management platform designed to streamline s
     │   │       └── Snippets.jsx
     │   ├── contexts
     │   │   ├── AuthContext.jsx
-    │   │   └── ThemeContext.jsx
+    │   │   
     │   ├── index.css
     │   ├── main.jsx
     │   └── pages
