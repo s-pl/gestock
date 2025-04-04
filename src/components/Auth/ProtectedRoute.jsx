@@ -15,7 +15,7 @@ function ProtectedRoute() {
   if(rNumber == 0) {
     navigate = "/login"
   } else {
-    navigate = "/register"
+    navigate = "/signup"
   }
 
   if (!currentUser) {

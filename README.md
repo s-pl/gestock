@@ -525,7 +525,9 @@ graph TB
     class WebApp,Firebase container
     class Router,AuthContext,ProtectedRoute,Home,Dashboard,About,Contact,InventoryManager,InventoryStats,Charts,Login,Signup,ResetPassword,Layout,Modal,Card,Auth,Firestore component
 ```
+## FeedReader
 
+![feedreader](https://i.ibb.co/NdBLbpK7/image.png)
 ## 🙌 Acknowledgments
 
 - Tiburcio
