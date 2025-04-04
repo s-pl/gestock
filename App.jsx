@@ -10,7 +10,6 @@ import ResetPassword from './components/Auth/ResetPassword.jsx'
 import Dashboard from './pages/Dashboard.jsx'
 import About from './pages/About.jsx'
 import Contact from './pages/Contact.jsx'
-import News from './pages/News.jsx'
 import ProtectedRoute from './components/Auth/ProtectedRoute.jsx'
 import { AuthProvider } from './contexts/AuthContext'
 
@@ -31,7 +30,6 @@ function App() {
               <Route path='/dashboard' element={<ProtectedRoute />}>
                 <Route path='' element={<Dashboard />} />
               </Route>
-              <Route path='/news' element={<News />} />
             </Route>
           </Routes>
         </BrowserRouter>
