@@ -1,4 +1,3 @@
-// src/components/Inventory/Inventory.jsx
 import React, { useState, useEffect } from 'react';
 import { collection, query, where, getDocs } from 'firebase/firestore';
 import { db } from '../../firebase/config';
@@ -68,15 +67,15 @@ function Inventory() {
   };
 
   const handleProductUpdated = (updatedProduct) => {
-    if (updatedProduct.id) {
-    
-      setProducts(products.map(p => 
-        p.id === updatedProduct.id ? updatedProduct : p
-      ));
-    } else {
-      
-      setProducts([...products, updatedProduct]);
-    }
+    setProducts(prevProducts => {
+      const existingProductIndex = prevProducts.findIndex(p => p.id === updatedProduct.id);
+      if (existingProductIndex !== -1) {
+        const updatedProducts = [...prevProducts];
+        updatedProducts[existingProductIndex] = updatedProduct;
+        return updatedProducts;
+      }
+      return [...prevProducts, updatedProduct];
+    });
   };
 
   const handleProductDeleted = (productId) => {
@@ -119,7 +118,7 @@ function Inventory() {
         <EmptyInventory onAddProduct={handleAddProduct} />
       ) : (
         <>
-          {/* Desktop view */}
+         
           <Box sx={{ display: { xs: 'none', md: 'block' }, width: '100%' }}>
             <ProductTable 
               products={products} 
@@ -128,7 +127,7 @@ function Inventory() {
             />
           </Box>
           
-          {/* Mobile view */}
+          
           <Box sx={{ display: { xs: 'flex', md: 'none' }, flexDirection: 'column', gap: 2 }}>
             <ProductCards 
               products={products} 
