@@ -105,7 +105,7 @@ Gestock is a cutting-edge inventory management platform designed to streamline s
     │   │       └── Snippets.jsx
     │   ├── contexts
     │   │   ├── AuthContext.jsx
-    │   │   
+    │   │   └── ThemeContext.jsx
     │   ├── index.css
     │   ├── main.jsx
     │   └── pages
@@ -525,8 +525,7 @@ graph TB
     class WebApp,Firebase container
     class Router,AuthContext,ProtectedRoute,Home,Dashboard,About,Contact,InventoryManager,InventoryStats,Charts,Login,Signup,ResetPassword,Layout,Modal,Card,Auth,Firestore component
 ```
-## FeedReader
-![feedreader](https://i.ibb.co/B5m8j07B/imagen.png)
+
 ## 🙌 Acknowledgments
 
 - Tiburcio
