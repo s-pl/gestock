@@ -35,8 +35,7 @@
   - [☑️ Prerequisites](#-prerequisites)
   - [⚙️ Installation](#-installation)
   - [🤖 Usage](#🤖-usage)
-  - [🧪 Testing](#🧪-testing)
-- [🔰 Contributing](#-contributing)
+  
 - [🎗 License](#-license)
 - [🙌 Acknowledgments](#-acknowledgments)
 
