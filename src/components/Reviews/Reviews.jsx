@@ -2,8 +2,6 @@ import React from 'react';
 import Box from '@mui/joy/Box';
 import Typography from '@mui/joy/Typography';
 import Grid from '@mui/joy/Grid';
-import Sheet from '@mui/joy/Sheet';
-import Avatar from '@mui/joy/Avatar';
 import Card from '@mui/joy/Card';
 import CardContent from '@mui/joy/CardContent';
 import Divider from '@mui/joy/Divider';
@@ -56,10 +54,7 @@ function Reviews() {
                         >
                             <CardContent>
                                 <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-                                    <Avatar
-                                        src={testimonial.avatar}
-                                        sx={{ width: 60, height: 60, mr: 2 }}
-                                    />
+                                   
                                     <Box>
                                         <Typography level="title-md">{testimonial.name}</Typography>
                                         <Typography level="body-sm" sx={{ color: 'text.secondary' }}>

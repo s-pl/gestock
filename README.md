@@ -35,8 +35,7 @@
   - [☑️ Prerequisites](#-prerequisites)
   - [⚙️ Installation](#-installation)
   - [🤖 Usage](#🤖-usage)
-  - [🧪 Testing](#🧪-testing)
-- [🔰 Contributing](#-contributing)
+  
 - [🎗 License](#-license)
 - [🙌 Acknowledgments](#-acknowledgments)
 
@@ -57,7 +56,6 @@ Gestock is a cutting-edge inventory management platform designed to streamline s
 | 📄 | **Documentation** | <ul><li>Documentation includes detailed `install_commands`, `usage_commands`, and `test_commands` using `<npm>`.</li><li>Codebase comments and README files provide guidance on setup, usage, and maintenance.</li><li>Language diversity in documentation with JSON, JS, HTML, CSS, and JSX files.</li></ul> |
 | 🔌 | **Integrations**  | <ul><li>Integrates with `<Firebase>` for real-time database operations and authentication.</li><li>Uses `<react-router-dom>` for SPA routing capabilities.</li><li>Charting functionalities integrated using `<chart.js>` and `<react-chartjs-2>` for data visualization.</li></ul> |
 | 🧩 | **Modularity**    | <ul><li>Highly modular structure with components like `Card.jsx`, `Modal.jsx`, and `AuthContext.jsx`.</li><li>Theme and authentication contexts (`ThemeContext.jsx` and `AuthContext.jsx`) enhance modularity by centralizing functionality.</li><li>Utilizes Material UI's design system for consistent UI components.</li></ul> |
-| 🧪 | **Testing**       | <ul><li>Testing commands provided in the documentation for execution via `<npm>`.</li><li>Project setup suggests a structured approach to testing, although specific testing frameworks are not detailed in the provided context.</li></ul> |
 | ⚡️  | **Performance**   | <ul><li>Uses `<Vite>` and `<@vitejs/plugin-react-swc>` for fast rebuilding and optimized production builds.</li><li>Employment of efficient frontend libraries like React for responsive UIs.</li></ul> |
 | 🛡️ | **Security**      | <ul><li>Implements secure authentication flows using `<Firebase>` and custom React contexts.</li><li>Protected routes with `ProtectedRoute.jsx` to ensure that sensitive areas of the application are accessible only to authenticated users.</li></ul> |
 
@@ -382,17 +380,10 @@ Run gestock using the following command:
 **Using `npm`** &nbsp; [<img align="center" src="https://img.shields.io/badge/npm-CB3837.svg?style={badge_style}&logo=npm&logoColor=white" />](https://www.npmjs.com/)
 
 ```sh
-❯ npm start
+❯ npm run dev
 ```
 
 
-### 🧪 Testing
-Run the test suite using the following command:
-**Using `npm`** &nbsp; [<img align="center" src="https://img.shields.io/badge/npm-CB3837.svg?style={badge_style}&logo=npm&logoColor=white" />](https://www.npmjs.com/)
-
-```sh
-❯ npm test
-```
 
 
 
@@ -525,7 +516,9 @@ graph TB
     class WebApp,Firebase container
     class Router,AuthContext,ProtectedRoute,Home,Dashboard,About,Contact,InventoryManager,InventoryStats,Charts,Login,Signup,ResetPassword,Layout,Modal,Card,Auth,Firestore component
 ```
+## FeedReader
 
+![feedreader](https://i.ibb.co/NdBLbpK7/image.png)
 ## 🙌 Acknowledgments
 
 - Tiburcio

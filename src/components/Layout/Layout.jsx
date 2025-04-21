@@ -168,11 +168,24 @@ const Layout = () => {
                     <MenuItem component={RouterLink} to="/dashboard">
                       Dashboard
                     </MenuItem>
-                    
                   )}
                   <MenuItem component={RouterLink} to="/contact">
                     Contacto
                   </MenuItem>
+                  {currentUser ? (
+                    <MenuItem onClick={handleLogout}>
+                      Cerrar sesión
+                    </MenuItem>
+                  ) : (
+                    <>
+                      <MenuItem component={RouterLink} to="/login">
+                        Iniciar sesión
+                      </MenuItem>
+                      <MenuItem component={RouterLink} to="/signup">
+                        Registrarse
+                      </MenuItem>
+                    </>
+                  )}
                   
                 </Menu>
               </Dropdown>
@@ -181,10 +194,10 @@ const Layout = () => {
            
             {currentUser ? (
               <>
-                <Typography level="body-sm" sx={{ alignSelf: 'center', mr: 2 }}>
+                <Typography level="body-sm" sx={{ alignSelf: 'center', mr: 2, display: { xs: 'none', md: 'inline-flex' } }}>
                   {currentUser.email}
                 </Typography>
-                <Button variant="outlined" color="neutral" onClick={handleLogout}>
+                <Button variant="outlined" color="neutral" onClick={handleLogout} sx={{ display: { xs: 'none', md: 'inline-flex' } }}>
                   Cerrar sesión
                 </Button>
               </>
@@ -195,11 +208,16 @@ const Layout = () => {
                   color="neutral" 
                   component={RouterLink} 
                   to="/login"
+                  sx={{ display: { xs: 'none', md: 'inline-flex' } }}
                 >
                   Iniciar sesión
                 </Button>
                 
-                <Button component={RouterLink} to="/signup">
+                <Button 
+                  component={RouterLink} 
+                  to="/signup"
+                  sx={{ display: { xs: 'none', md: 'inline-flex' } }}
+                >
                   Registrarse
                 </Button>
               </>
