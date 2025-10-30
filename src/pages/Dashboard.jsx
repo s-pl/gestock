@@ -1,6 +1,7 @@
 import React from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { Navigate } from 'react-router-dom';
+import { InventoryProvider } from '../contexts/InventoryContext';
 import Box from '@mui/joy/Box';
 import Typography from '@mui/joy/Typography';
 import Tabs from '@mui/joy/Tabs';
@@ -25,24 +26,26 @@ function Dashboard() {
   }
 
   return (
-    <Box sx={{ maxWidth: '1450px', margin: '0 auto', padding: 2 }}>
-      <Typography level="h2" sx={{ mb: 3 }}>
-        Panel de Control
-      </Typography>
-      
-      <Tabs value={tabValue} onChange={handleTabChange} sx={{ mb: 3 }}>
-        <TabList>
-          <Tab>Inventario</Tab>
-          <Tab>Estadísticas</Tab>
-        </TabList>
-        <TabPanel value={0}>
-          <Inventory />
-        </TabPanel>
-        <TabPanel value={1}>
-          <InventoryStats />
-        </TabPanel>
-      </Tabs>
-    </Box>
+    <InventoryProvider>
+      <Box sx={{ maxWidth: '1450px', margin: '0 auto', padding: 2 }}>
+        <Typography level="h2" sx={{ mb: 3 }}>
+          Panel de Control
+        </Typography>
+        
+        <Tabs value={tabValue} onChange={handleTabChange} sx={{ mb: 3 }}>
+          <TabList>
+            <Tab>Inventario</Tab>
+            <Tab>Estadísticas</Tab>
+          </TabList>
+          <TabPanel value={0}>
+            <Inventory />
+          </TabPanel>
+          <TabPanel value={1}>
+            <InventoryStats />
+          </TabPanel>
+        </Tabs>
+      </Box>
+    </InventoryProvider>
   );
 }
 

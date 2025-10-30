@@ -24,7 +24,6 @@ import gestockLogo from '../../assets/gestock-logo.svg';
 const Layout = () => {
   const { currentUser, logout } = useAuth();
   const navigate = useNavigate();
-  const [error, setError] = React.useState('');
   const [openTerms, setOpenTerms] = React.useState(false);
   const [openPrivacy, setOpenPrivacy] = React.useState(false);
   const [openCookies, setOpenCookies] = React.useState(false);
@@ -35,8 +34,7 @@ const Layout = () => {
       await logout();
       navigate('/login');
     } catch (error) {
-      setError('Error al cerrar sesión');
-      console.error(error);
+      console.error('Error al cerrar sesión:', error);
     }
   }
 

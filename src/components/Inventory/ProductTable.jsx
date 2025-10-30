@@ -5,7 +5,7 @@ import Typography from '@mui/joy/Typography';
 import Box from '@mui/joy/Box';
 import Button from '@mui/joy/Button';
 
-function ProductTable({ products, onEdit, onDelete }) {
+const ProductTable = React.memo(function ProductTable({ products, onEdit, onDelete }) {
   const handleDeleteProduct = (productId) => {
     if (!window.confirm('¿Estás seguro de que deseas eliminar este producto?')) {
       return;
@@ -76,6 +76,6 @@ function ProductTable({ products, onEdit, onDelete }) {
       </Table>
     </Sheet>
   );
-}
+});
 
 export default ProductTable;

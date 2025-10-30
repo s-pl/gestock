@@ -7,7 +7,7 @@ import CardContent from '@mui/joy/CardContent';
 import Divider from '@mui/joy/Divider';
 import  testimonials  from '../../services/testimonials'
 
-function Reviews() {
+const Reviews = React.memo(function Reviews() {
     
     const StarRating = ({ value }) => {
         return (
@@ -87,6 +87,6 @@ function Reviews() {
             </Grid>
         </Box>
     );
-}
+});
 
 export default Reviews;

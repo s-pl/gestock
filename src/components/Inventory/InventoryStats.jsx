@@ -1,7 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { collection, query, where, getDocs } from 'firebase/firestore';
-import { db } from '../../firebase/config';
-import { useAuth } from '../../contexts/AuthContext';
+import React, { useMemo } from 'react';
+import { useInventory } from '../../contexts/InventoryContext';
 import { Bar } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
@@ -29,76 +27,37 @@ ChartJS.register(
 );
 
 function InventoryStats() {
-  const { currentUser } = useAuth();
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
-  const [categoryData, setCategoryData] = useState({
-    labels: [],
-    counts: []
-  });
-  const [priceData, setPriceData] = useState({
-    labels: [],
-    values: []
-  });
+  const { products, loading, error } = useInventory();
 
-  useEffect(() => {
-    if (!currentUser) return;
+  // Memoize expensive calculations
+  const { categoryData, priceData } = useMemo(() => {
+    const categoryMap = {};
+    const categoryValueMap = {};
 
-    const fetchInventoryStats = async () => {
-      try {
-        setLoading(true);
-        const q = query(
-          collection(db, 'products'),
-          where('userId', '==', currentUser.uid)
-        );
-        const querySnapshot = await getDocs(q);
-        const products = [];
-        querySnapshot.forEach((doc) => {
-          products.push({ id: doc.id, ...doc.data() });
-        });
+    products.forEach(product => {
+      const category = product.category || 'Sin categoría';
+      categoryMap[category] = (categoryMap[category] || 0) + 1;
+      
+      const value = product.price * product.quantity;
+      categoryValueMap[category] = (categoryValueMap[category] || 0) + value;
+    });
 
-   
-        const categoryMap = {};
-        products.forEach(product => {
-          const category = product.category || 'Sin categoría';
-          categoryMap[category] = (categoryMap[category] || 0) + 1;
-        });
+    const categoryLabels = Object.keys(categoryMap);
+    const categoryCounts = categoryLabels.map(label => categoryMap[label]);
+    const valueLabels = Object.keys(categoryValueMap);
+    const valueData = valueLabels.map(label => categoryValueMap[label]);
 
-        const categoryLabels = Object.keys(categoryMap);
-        const categoryCounts = categoryLabels.map(label => categoryMap[label]);
-
-        setCategoryData({
-          labels: categoryLabels,
-          counts: categoryCounts
-        });
-
-
-        const categoryValueMap = {};
-        products.forEach(product => {
-          const category = product.category || 'Sin categoría';
-          const value = product.price * product.quantity;
-          categoryValueMap[category] = (categoryValueMap[category] || 0) + value;
-        });
-
-        const valueLabels = Object.keys(categoryValueMap);
-        const valueData = valueLabels.map(label => categoryValueMap[label]);
-
-        setPriceData({
-          labels: valueLabels,
-          values: valueData
-        });
-
-        setError('');
-      } catch (err) {
-        console.error('Error fetching inventory stats:', err);
-        setError('Error al cargar las estadísticas. Por favor, inténtalo de nuevo.');
-      } finally {
-        setLoading(false);
+    return {
+      categoryData: {
+        labels: categoryLabels,
+        counts: categoryCounts
+      },
+      priceData: {
+        labels: valueLabels,
+        values: valueData
       }
     };
-
-    fetchInventoryStats();
-  }, [currentUser]);
+  }, [products]);
 
   const categoryChartData = {
     labels: categoryData.labels,
