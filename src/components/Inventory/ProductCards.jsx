@@ -5,7 +5,7 @@ import Box from '@mui/joy/Box';
 import Button from '@mui/joy/Button';
 import Divider from '@mui/joy/Divider';
 
-function ProductCards({ products, onEdit, onDelete }) {
+const ProductCards = React.memo(function ProductCards({ products, onEdit, onDelete }) {
   const handleDeleteProduct = (productId) => {
     if (!window.confirm('¿Estás seguro de que deseas eliminar este producto?')) {
       return;
@@ -87,6 +87,6 @@ function ProductCards({ products, onEdit, onDelete }) {
       ))}
     </>
   );
-}
+});
 
 export default ProductCards;

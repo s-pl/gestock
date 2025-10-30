@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { collection, query, where, getDocs } from 'firebase/firestore';
-import { db } from '../../firebase/config';
+import React, { useState, useMemo } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
+import { useInventory } from '../../contexts/InventoryContext';
 import Box from '@mui/joy/Box';
 import Typography from '@mui/joy/Typography';
 import Button from '@mui/joy/Button';
@@ -16,45 +15,18 @@ import ApiKeyDisplay from './ApiKeyDisplay';
 
 function Inventory() {
   const { currentUser } = useAuth();
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
+  const { products, loading, error, updateProduct, deleteProduct } = useInventory();
   const [openModal, setOpenModal] = useState(false);
   const [currentProduct, setCurrentProduct] = useState(null);
-  const [filter, setFilter] = useState(null);
+  const [filter, setFilter] = useState('');
 
-  useEffect(() => {
-    if (!currentUser) return;
-    
-    const fetchProducts = async () => {
-      try {
-        setLoading(true);
-        const q = query(
-          collection(db, 'products'),
-          where('userId', '==', currentUser.uid)
-        );
-        const querySnapshot = await getDocs(q);
-        const productsData = [];
-
-        querySnapshot.forEach((doc) => {
-          const productData = doc.data();
-          if (!filter || productData.name.toLowerCase().includes(filter.toLowerCase())) {
-            productsData.push({ id: doc.id, ...productData });
-          }
-        });
-
-        setProducts(productsData);
-        setError('');
-      } catch (err) {
-        console.error('Error fetching products:', err);
-        setError('Error al cargar los productos. Por favor, inténtalo de nuevo.');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchProducts();
-  }, [currentUser, filter]);
+  // Client-side filtering using useMemo for performance
+  const filteredProducts = useMemo(() => {
+    if (!filter) return products;
+    return products.filter(product => 
+      product.name.toLowerCase().includes(filter.toLowerCase())
+    );
+  }, [products, filter]);
 
   const handleAddProduct = () => {
     setCurrentProduct(null);
@@ -67,19 +39,11 @@ function Inventory() {
   };
 
   const handleProductUpdated = (updatedProduct) => {
-    setProducts(prevProducts => {
-      const existingProductIndex = prevProducts.findIndex(p => p.id === updatedProduct.id);
-      if (existingProductIndex !== -1) {
-        const updatedProducts = [...prevProducts];
-        updatedProducts[existingProductIndex] = updatedProduct;
-        return updatedProducts;
-      }
-      return [...prevProducts, updatedProduct];
-    });
+    updateProduct(updatedProduct);
   };
 
   const handleProductDeleted = (productId) => {
-    setProducts(products.filter(p => p.id !== productId));
+    deleteProduct(productId);
   };
 
   return (
@@ -95,7 +59,8 @@ function Inventory() {
         <Typography level="h2">Inventario</Typography>
         <Input
           placeholder="Busca por nombre del producto"
-          onKeyUp={(e) => setFilter(e.target.value)}
+          value={filter}
+          onChange={(e) => setFilter(e.target.value)}
           sx={{
             maxWidth: { xs: '100%', sm: '400px' },
             width: '100%'
@@ -114,14 +79,20 @@ function Inventory() {
 
       {loading ? (
         <Typography>Cargando productos...</Typography>
-      ) : products.length === 0 ? (
-        <EmptyInventory onAddProduct={handleAddProduct} />
+      ) : filteredProducts.length === 0 ? (
+        products.length === 0 ? (
+          <EmptyInventory onAddProduct={handleAddProduct} />
+        ) : (
+          <Typography level="body-md" sx={{ textAlign: 'center', my: 4 }}>
+            No se encontraron productos que coincidan con tu búsqueda.
+          </Typography>
+        )
       ) : (
         <>
          
           <Box sx={{ display: { xs: 'none', md: 'block' }, width: '100%' }}>
             <ProductTable 
-              products={products} 
+              products={filteredProducts} 
               onEdit={handleEditProduct} 
               onDelete={handleProductDeleted} 
             />
@@ -130,7 +101,7 @@ function Inventory() {
           
           <Box sx={{ display: { xs: 'flex', md: 'none' }, flexDirection: 'column', gap: 2 }}>
             <ProductCards 
-              products={products} 
+              products={filteredProducts} 
               onEdit={handleEditProduct} 
               onDelete={handleProductDeleted} 
             />

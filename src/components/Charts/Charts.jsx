@@ -22,7 +22,7 @@ ChartJS.register(
   Legend
 );
 
-function Charts() {
+const Charts = React.memo(function Charts() {
   
   const options = {
     responsive: true,
@@ -98,6 +98,6 @@ function Charts() {
       </Grid>
     </Box>
   );
-}
+});
 
 export default Charts;
