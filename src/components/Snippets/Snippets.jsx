@@ -10,7 +10,7 @@ import TabPanel from '@mui/joy/TabPanel';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { dracula } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 
-function Snippets() {
+const Snippets = React.memo(function Snippets() {
     const [tabValue, setTabValue] = React.useState(0);
 
     const handleTabChange = (event, newValue) => {
@@ -102,6 +102,6 @@ addProduct();`}
             </Grid>
         </Box>
     );
-}
+});
 
 export default Snippets;
